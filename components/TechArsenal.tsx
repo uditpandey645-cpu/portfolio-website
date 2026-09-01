@@ -1,0 +1,1073 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+interface TechTool {
+  name: string;
+  color?: string;
+  icon: React.ReactNode;
+}
+
+interface CategoryData {
+  id: string;
+  number: string;
+  title: string;
+  color: string;
+  tools: TechTool[];
+}
+
+export default function TechArsenal() {
+  const [activeCategory, setActiveCategory] = useState<number>(0);
+
+  const categories: CategoryData[] = [
+    {
+      id: "frontend",
+      number: "01",
+      title: "Languages & Frontend",
+      color: "#61DAFB",
+      tools: [
+        {
+          name: "JavaScript",
+          color: "#F7DF1E",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#F7DF1E">
+              <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.704-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" />
+            </svg>
+          ),
+        },
+        {
+          name: "TypeScript",
+          color: "#3178C6",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#3178C6">
+              <path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z" />
+            </svg>
+          ),
+        },
+        {
+          name: "C++",
+          color: "#00599C",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#00599C">
+              <path d="M22.394 6c-.167-.29-.398-.543-.652-.69L12.926.22c-.509-.294-1.34-.294-1.848 0L2.26 5.31c-.508.293-.923 1.013-.923 1.6v10.18c0 .294.104.62.271.91.167.29.398.543.652.69l8.816 5.09c.508.293 1.34.293 1.848 0l8.816-5.09c.254-.147.485-.4.652-.69.167-.29.27-.616.27-.91V6.91c.003-.294-.1-.62-.268-.91zM12 19.109c-3.92 0-7.109-3.189-7.109-7.109S8.08 4.891 12 4.891a7.133 7.133 0 0 1 6.156 3.552l-3.076 1.781A3.567 3.567 0 0 0 12 8.445c-1.96 0-3.554 1.595-3.554 3.555S10.04 15.555 12 15.555a3.57 3.57 0 0 0 3.08-1.778l3.077 1.78A7.135 7.135 0 0 1 12 19.109zm7.109-6.714h-.79v.79h-.79v-.79h-.79v-.79h.79v-.79h.79v.79h.79zm2.962 0h-.79v.79h-.79v-.79h-.79v-.79h.79v-.79h.79v.79h.79z" />
+            </svg>
+          ),
+        },
+        {
+          name: "React.js",
+          color: "#61DAFB",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="12" cy="12" r="2.139" fill="#61DAFB" />
+              <g stroke="#61DAFB" strokeWidth="1">
+                <ellipse rx="10" ry="3.8" cx="12" cy="12" />
+                <ellipse rx="10" ry="3.8" cx="12" cy="12" transform="rotate(60 12 12)" />
+                <ellipse rx="10" ry="3.8" cx="12" cy="12" transform="rotate(120 12 12)" />
+              </g>
+            </svg>
+          ),
+        },
+        {
+          name: "Next.js",
+          color: "#ffffff",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="white">
+              <path d="M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 01-.364.033C7.443.346 4.25 2.185 2.228 5.012a11.875 11.875 0 00-2.119 5.243c-.096.659-.108.854-.108 1.747s.012 1.089.108 1.748c.652 4.506 3.86 8.292 8.209 9.695.779.25 1.6.422 2.534.525.363.04 1.935.04 2.299 0 1.611-.178 2.977-.577 4.323-1.264.207-.106.247-.134.219-.158-.02-.013-.9-1.193-1.955-2.62l-1.919-2.592-2.404-3.558a338.739 338.739 0 00-2.422-3.556c-.009-.002-.018 1.579-.023 3.51-.007 3.38-.01 3.515-.052 3.595a.426.426 0 01-.206.214c-.075.037-.14.044-.495.044H7.81l-.108-.068a.438.438 0 01-.157-.171l-.05-.106.006-4.703.007-4.705.072-.092a.645.645 0 01.174-.143c.096-.047.134-.051.54-.051.478 0 .558.018.682.154.035.038 1.337 1.999 2.895 4.361a10760.433 10760.433 0 004.735 7.17l1.9 2.879.096-.063a12.317 12.317 0 002.466-2.163 11.944 11.944 0 002.824-6.134c.096-.66.108-.854.108-1.748 0-.893-.012-1.088-.108-1.747-.652-4.506-3.859-8.292-8.208-9.695a12.597 12.597 0 00-2.499-.523A33.119 33.119 0 0011.573 0z" />
+            </svg>
+          ),
+        },
+        {
+          name: "HTML5",
+          color: "#E34F26",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#E34F26">
+              <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" />
+            </svg>
+          ),
+        },
+        {
+          name: "CSS3",
+          color: "#1572B6",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#1572B6">
+              <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.413z" />
+            </svg>
+          ),
+        },
+        {
+          name: "TailwindCSS",
+          color: "#06B6D4",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#06B6D4">
+              <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Framer Motion",
+          color: "#BB4B96",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#BB4B96">
+              <path d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z" />
+            </svg>
+          ),
+        },
+        {
+          name: "GSAP",
+          color: "#88CE02",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#88CE02">
+              <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm0 2.4c5.304 0 9.6 4.296 9.6 9.6s-4.296 9.6-9.6 9.6S2.4 17.304 2.4 12 6.696 2.4 12 2.4zm-1.2 3.6v2.4H6v2.4h4.8V13.2H6v2.4h4.8V18h2.4v-2.4H18v-2.4h-4.8V10.8H18V8.4h-4.8V6h-2.4z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Three.js",
+          color: "#ffffff",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="white">
+              <path d="M.38 0L6.7 23.76l17.05-7.36L.38 0zm1.893 1.552l14.417 13.48-12.67 5.46L1.811 1.49l.462.062zM7.16 2.705l10.925 10.226-9.58 4.133L7.16 2.705z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Lenis",
+          color: "#ffffff",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <rect x="2" y="2" width="20" height="20" rx="4" stroke="white" strokeWidth="1.5" opacity="0.7" />
+              <path d="M7 12 Q12 7 17 12 Q12 17 7 12Z" fill="white" opacity="0.8" />
+            </svg>
+          ),
+        },
+      ],
+    },
+    {
+      id: "backend",
+      number: "02",
+      title: "Backend & AI Dev Tools",
+      color: "#6ee37b",
+      tools: [
+        {
+          name: "Node.js",
+          color: "#339933",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#339933">
+              <path d="M11.998 24a2.4 2.4 0 01-1.2-.32l-3.82-2.263c-.572-.32-.293-.433-.104-.499.762-.266.917-.326 1.729-.789.085-.048.198-.03.286.019l2.933 1.74c.105.06.256.06.354 0l11.44-6.605c.105-.06.172-.185.172-.312V7.026c0-.13-.067-.252-.174-.315L12.177.108a.36.36 0 00-.354 0L.388 6.71A.366.366 0 00.214 7.026v13.21c0 .127.067.252.174.312l3.132 1.809c1.7.85 2.742-.151 2.742-1.156V8.336c0-.185.148-.33.333-.33h1.45c.183 0 .33.145.33.33v12.865c0 2.264-1.234 3.563-3.381 3.563-.66 0-1.18 0-2.633-.715L.386 22.45A2.414 2.414 0 01-.001 20.236V7.026c0-.836.447-1.614 1.17-2.032L12.609.388a2.437 2.437 0 012.386 0l11.44 6.606A2.368 2.368 0 0127.606 9v13.21a2.37 2.37 0 01-1.17 2.032l-11.44 6.606c-.37.214-.786.32-1.2.32l.002.832z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Express.js",
+          color: "#ffffff",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="white">
+              <path d="M24 18.588a1.529 1.529 0 01-1.895-.72l-3.45-4.771-.5-.667-4.003 5.444a1.466 1.466 0 01-1.802.708l5.158-6.92-4.798-6.251a1.595 1.595 0 011.9.666l3.576 4.83 3.596-4.81a1.435 1.435 0 011.788-.668L21.708 7.9l-2.522 3.283a.666.666 0 000 .994l4.804 6.412zM.002 11.576l.42-2.075c1.154-4.103 5.858-5.81 9.094-3.27 1.895 1.489 2.368 3.597 2.275 5.973H1.116C.943 16.447 4.005 19.009 7.92 17.7a4.078 4.078 0 002.582-2.876c.207-.666.548-.78 1.174-.588a5.417 5.417 0 01-2.589 3.957 6.272 6.272 0 01-7.306-.933 6.575 6.575 0 01-1.64-3.858c-.013-.447-.013-.912-.013-1.826zm1.127-.5h8.981c-.159-3.41-2.674-5.876-5.56-5.607-3.179.29-4.794 2.65-3.421 5.607z" />
+            </svg>
+          ),
+        },
+        {
+          name: "REST APIs",
+          color: "#FF6C37",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#FF6C37">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2zm-1 4v2H7v2h4v2H7v2h4v2H6V6h5zm3 0h3c1.1 0 2 .9 2 2v1c0 .74-.4 1.38-1 1.72V10c.6.34 1 .98 1 1.72V13c0 1.1-.9 2-2 2h-3V6zm2 2v2h1V8h-1zm0 4v2h1v-2h-1z" />
+            </svg>
+          ),
+        },
+        {
+          name: "SSE",
+          color: "#6ee37b",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M3 12h4M10 8v8M14 6v12M18 9v6" stroke="#6ee37b" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "NextAuth",
+          color: "#ffffff",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="white">
+              <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z" />
+            </svg>
+          ),
+        },
+        {
+          name: "JWT",
+          color: "#FB015B",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#FB015B">
+              <path d="M10.2 0v6.456L12 8.928l1.8-2.472V0zm3.6 0v6.456L12 8.928 10.2 6.456V0zM0 8.064l5.508 3.24 2.868-.636-.636-2.868L0 8.064zm0 0L3.24 2.556l5.508 3.24L8.1 8.664zm24 0l-5.508 3.24-2.868-.636.636-2.868L24 8.064zm0 0L20.76 2.556l-5.508 3.24.648 2.868z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Puppeteer",
+          color: "#00D8A2",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#00D8A2">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Firebase Admin",
+          color: "#FFCA28",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#FFCA28">
+              <path d="M3.89 15.672L6.255.461A.542.542 0 017.27.288l2.543 4.771zm16.794 3.692l-2.25-14a.54.54 0 00-.919-.295L3.316 19.365l7.856 4.427a1.621 1.621 0 001.588 0zM14.3 7.147l-1.82-3.482a.542.542 0 00-.96 0L3.53 17.984z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Claude Code",
+          color: "#CC785C",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M12 2L3 7v10l9 5 9-5V7L12 2z" fill="#CC785C" opacity="0.9" />
+              <path d="M8 12l2.5 2.5L16 9" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Antigravity",
+          color: "#00D8A2",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="12" cy="12" r="8" stroke="#00D8A2" strokeWidth="1.5" strokeDasharray="4 2" />
+              <circle cx="12" cy="12" r="3" fill="#00D8A2" />
+              <path d="M12 2v2M12 20v2M2 12h2M20 12h2" stroke="#00D8A2" strokeWidth="1.5" />
+            </svg>
+          ),
+        },
+        {
+          name: "Cursor",
+          color: "#ffffff",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M5.5 3.5l14 10.5-6 2.5 3 6-2 1-3-6-4.5 4V3.5z" stroke="white" strokeWidth="1.5" fill="black" />
+            </svg>
+          ),
+        },
+        {
+          name: "Opencode",
+          color: "#FBBF24",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M8 7l-5 5 5 5M16 7l5 5-5 5" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "GitHub Copilot",
+          color: "#ffffff",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="white">
+              <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
+            </svg>
+          ),
+        },
+      ],
+    },
+    {
+      id: "databases",
+      number: "03",
+      title: "Databases",
+      color: "#f59e0b",
+      tools: [
+        {
+          name: "PostgreSQL",
+          color: "#4169E1",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#4169E1">
+              <path d="M23.5454 11.9048c-.1818-1.0364-.6727-1.9636-1.3636-2.7091-.0909-.1273-.2-.2182-.3-.3182-.2818-2.8909-1.5455-5.4182-3.6-7.1818C17.0636.9048 15.3636.2 13.5636.0182 12.4.1636 11.4727.4182 10.5636.9636c-.1.0546-.1636.1091-.2636.1636C9.1818.5454 7.9636.4 6.7818.8182c-2.0182.6909-3.7636 2.4-4.4727 4.4909-.4909 1.3636-.5273 2.8-.1818 4.2.0909.3636.2182.7273.3636 1.0727-.4909 1-.7636 2.1273-.7818 3.2909-.0182 1.2.2727 2.3818.8182 3.4182.5273 1 1.2909 1.8364 2.2182 2.4545.9273.6182 2 .9636 3.1272 1C8.2182 21.1636 8.7636 21.5273 9.3636 21.7636c1.1273.4364 2.3636.5636 3.5636.3636.5818-.0909 1.1455-.2727 1.6727-.5273.3636.1455.7454.2545 1.1272.3182.9455.1455 1.9273.0909 2.8364-.1636.9091-.2727 1.7273-.7636 2.3818-1.4182.6545-.6545 1.1273-1.4727 1.3636-2.3636.2364-.9.2182-1.8364-.0545-2.7273z" />
+            </svg>
+          ),
+        },
+        {
+          name: "MongoDB",
+          color: "#47A248",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#47A248">
+              <path d="M17.193 9.555c-1.264-5.58-4.252-7.414-4.573-8.115-.28-.394-.53-.954-.735-1.44-.036.495-.055.685-.523 1.184-.723.566-4.438 3.682-4.74 10.02-.282 5.912 4.27 9.435 4.888 9.884l.07.05A73.49 73.49 0 0111.91 24h.481c.114-1.032.284-2.056.51-3.07.417-.296.604-.463.85-.693a11.342 11.342 0 003.639-8.464c.01-.814-.103-1.662-.197-2.218zm-5.336 8.195s0-8.291.275-8.29c.213 0 .49 10.695.49 10.695-.381-.045-.765-1.76-.765-2.405z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Drizzle ORM",
+          color: "#C5F74F",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#C5F74F">
+              <path d="M0 12.5l4-7 4 7H0zm8 0l4-7 4 7H8zm8 0l4-7 4 7h-8zM2 16l4-7 4 7H2zm8 0l4-7 4 7h-8z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Supabase",
+          color: "#3ECF8E",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#3ECF8E">
+              <path d="M11.9 1.036c-.015-.986-1.26-1.41-1.874-.637L.764 12.05C.141 12.857.74 14 1.763 14H12.9c.985 0 1.49-1.2.879-1.967L12 10.237V1.036zM12.1 22.964c.015.986 1.261 1.41 1.875.637l9.261-11.652c.624-.807.024-1.95-.998-1.95H12.1c-.985 0-1.49 1.2-.879 1.967L12 13.763v9.201z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Convex",
+          color: "#FF6B35",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#FF6B35">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
+          ),
+        },
+        {
+          name: "Firebase",
+          color: "#FFCA28",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#FFCA28">
+              <path d="M3.89 15.672L6.255.461A.542.542 0 017.27.288l2.543 4.771zm16.794 3.692l-2.25-14a.54.54 0 00-.919-.295L3.316 19.365l7.856 4.427a1.621 1.621 0 001.588 0zM14.3 7.147l-1.82-3.482a.542.542 0 00-.96 0L3.53 17.984z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Neon",
+          color: "#00E5FF",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#00E5FF">
+              <path d="M4 4h16v16H4zm2 2v12h12V6z" />
+              <circle cx="12" cy="12" r="3" fill="#00E5FF" />
+            </svg>
+          ),
+        },
+      ],
+    },
+    {
+      id: "ai",
+      number: "04",
+      title: "AI & Integrations",
+      color: "#f87171",
+      tools: [
+        {
+          name: "LangChain",
+          color: "#1C8C5E",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="7" cy="12" r="3" stroke="#1C8C5E" strokeWidth="1.5" />
+              <circle cx="17" cy="12" r="3" stroke="#1C8C5E" strokeWidth="1.5" />
+              <path d="M10 12h4" stroke="#1C8C5E" strokeWidth="1.5" />
+              <path d="M4 12H2M22 12h-2" stroke="#1C8C5E" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Grok",
+          color: "#ffffff",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M4 4l16 16M4 20L20 4" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Gemini",
+          color: "#4285F4",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full">
+              <defs>
+                <linearGradient id="gem" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#4285F4" />
+                  <stop offset="100%" stopColor="#EA4335" />
+                </linearGradient>
+              </defs>
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="url(#gem)" />
+            </svg>
+          ),
+        },
+        {
+          name: "pgvector",
+          color: "#336791",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#336791">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-5h2v2h-2zm0-8h2v6h-2z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Inngest",
+          color: "#7B61FF",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#7B61FF">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
+          ),
+        },
+        {
+          name: "Stripe",
+          color: "#635BFF",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#635BFF">
+              <path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.591-7.305z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Tavily",
+          color: "#0EA5E9",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#0EA5E9" strokeWidth="1.5" />
+              <path d="M8 12l3 3 5-6" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Gmail API",
+          color: "#EA4335",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z" stroke="#EA4335" strokeWidth="1.5" />
+              <path d="M2 6l10 7 10-7" stroke="#EA4335" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Cloudinary",
+          color: "#3448C5",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#3448C5">
+              <path d="M19.8 9.4c-.2-3.3-2.9-6-6.3-6-2.5 0-4.7 1.4-5.8 3.6C6.3 7 5 8.4 5 10c0 1.7 1.3 3 3 3h11c1.7 0 3-1.3 3-3 0-1-.5-1.8-1.2-2.6z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Web Push",
+          color: "#8B5CF6",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M12 2C8.13 2 5 5.13 5 9v5l-2 2v1h18v-1l-2-2V9c0-3.87-3.13-7-7-7z" stroke="#8B5CF6" strokeWidth="1.5" />
+              <path d="M10 19c0 1.1.9 2 2 2s2-.9 2-2" stroke="#8B5CF6" strokeWidth="1.5" />
+            </svg>
+          ),
+        },
+      ],
+    },
+    {
+      id: "cloud",
+      number: "05",
+      title: "Cloud & DevOps",
+      color: "#FF9900",
+      tools: [
+        {
+          name: "AWS EC2",
+          color: "#FF9900",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="3" fill="#FF9900" opacity="0.1" stroke="#FF9900" strokeWidth="1.5" />
+              <path d="M7 12h10M12 7v10" stroke="#FF9900" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "EBS",
+          color: "#FF9900",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <rect x="4" y="6" width="16" height="12" rx="2" stroke="#FF9900" strokeWidth="1.5" />
+              <path d="M8 12h8" stroke="#FF9900" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "EFS",
+          color: "#FF9900",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M12 2L3 7v10l9 5 9-5V7L12 2z" stroke="#FF9900" strokeWidth="1.5" />
+              <path d="M12 12v10M3 7l9 5M21 7l-9 5" stroke="#FF9900" strokeWidth="1.5" />
+            </svg>
+          ),
+        },
+        {
+          name: "AMI",
+          color: "#FF9900",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <rect x="2" y="2" width="20" height="20" rx="4" stroke="#FF9900" strokeWidth="1.5" />
+              <circle cx="12" cy="12" r="5" stroke="#FF9900" strokeWidth="1.5" />
+            </svg>
+          ),
+        },
+        {
+          name: "Auto Scaling Groups",
+          color: "#FF9900",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M4 14l-2-2 2-2M20 14l2-2-2-2M10 4l2-2 2 2M10 20l2 2 2-2" stroke="#FF9900" strokeWidth="1.5" strokeLinecap="round" />
+              <circle cx="12" cy="12" r="4" stroke="#FF9900" strokeWidth="1.5" />
+            </svg>
+          ),
+        },
+        {
+          name: "RDS",
+          color: "#FF9900",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <ellipse cx="12" cy="6" rx="8" ry="3" stroke="#FF9900" strokeWidth="1.5" />
+              <path d="M4 6v12c0 1.66 3.58 3 8 3s8-1.34 8-3V6" stroke="#FF9900" strokeWidth="1.5" />
+              <path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3" stroke="#FF9900" strokeWidth="1.5" />
+            </svg>
+          ),
+        },
+        {
+          name: "IAM",
+          color: "#FF9900",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M12 2L3 6v5.2c0 5.4 3.9 10.4 9 11.8 5.1-1.4 9-6.4 9-11.8V6l-9-4z" stroke="#FF9900" strokeWidth="1.5" fill="#FF9900" fillOpacity="0.1" />
+              <path d="M12 8a2 2 0 100 4 2 2 0 000-4zm-3 7c0-1.66 1.34-3 3-3s3 1.34 3 3" stroke="#FF9900" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+      ],
+    },
+    {
+      id: "tools",
+      number: "06",
+      title: "Tools & Architectures",
+      color: "#94a3b8",
+      tools: [
+        {
+          name: "Git",
+          color: "#F05032",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#F05032">
+              <path d="M23.546 10.93L13.067.452a1.55 1.55 0 00-2.188 0L8.708 2.627l2.76 2.76a1.838 1.838 0 012.327 2.341l2.658 2.66a1.838 1.838 0 011.786 3.032 1.837 1.837 0 01-2.565-2.56l-2.485-2.484v6.526a1.838 1.838 0 11-1.505-.018V8.36a1.835 1.835 0 01-.999-2.411L8.218 3.31.454 11.072a1.55 1.55 0 000 2.187l10.48 10.478a1.55 1.55 0 002.186 0l10.426-10.426a1.55 1.55 0 000-2.381z" />
+            </svg>
+          ),
+        },
+        {
+          name: "GitHub",
+          color: "#ffffff",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="white">
+              <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Docker",
+          color: "#2496ED",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#2496ED">
+              <path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.184-.186h-2.12a.186.186 0 00-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 00-.75.748 11.376 11.376 0 00.692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 003.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Vercel",
+          color: "#ffffff",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="white">
+              <path d="M24 22.525H0l12-21.05 12 21.05z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Monorepos",
+          color: "#38BDF8",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" stroke="#38BDF8" strokeWidth="1.5" />
+              <path d="M9 14h6M9 10h3" stroke="#38BDF8" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Chrome MV3",
+          color: "#4285F4",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="12" cy="12" r="4" fill="#4285F4" />
+              <path d="M12 8h8.48a10 10 0 010 8H12" stroke="#EA4335" strokeWidth="4" fill="none" />
+              <path d="M7.27 14L3.03 6.5a10 10 0 000 11L7.27 14" stroke="#FBBC05" strokeWidth="4" fill="none" />
+              <path d="M16.73 14l-4.24 7.36a10 10 0 01-9.46-7.36" stroke="#34A853" strokeWidth="4" fill="none" />
+            </svg>
+          ),
+        },
+        {
+          name: "PWA",
+          color: "#5A0FC8",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#5A0FC8">
+              <path d="M1.608 13.888l3.504-8.096h1.664l1.328 5.808 1.856-5.808h1.616l1.392 5.76 1.248-5.76h1.68l-2.08 8.096h-1.632l-1.44-5.952-1.888 5.952h-1.6L6.752 7.84l-1.552 6.048zm11.04 0l3.504-8.096h1.664l3.504 8.096h-1.792l-.704-1.84h-3.664l-.72 1.84zm2.896-3.2h2.56l-1.264-3.264z" />
+            </svg>
+          ),
+        },
+        {
+          name: "TipTap",
+          color: "#6B21A8",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <rect x="2" y="3" width="20" height="18" rx="2" stroke="#6B21A8" strokeWidth="1.5" />
+              <path d="M7 8h10M7 12h7M7 16h5" stroke="#6B21A8" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Termius",
+          color: "#4ADE80",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <rect x="2" y="3" width="20" height="18" rx="3" stroke="white" strokeWidth="1.5" fill="#1E1E1E" />
+              <path d="M6 8l4 4-4 4M14 16h4" stroke="#4ADE80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          ),
+        },
+      ],
+    },
+    {
+      id: "hardware",
+      number: "07",
+      title: "Hardware & Robotics",
+      color: "#00F0FF",
+      tools: [
+        {
+          name: "Embedded Systems",
+          color: "#00F0FF",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="2" stroke="#00F0FF" strokeWidth="1.5" />
+              <circle cx="7" cy="7" r="1.5" fill="#00F0FF" />
+              <circle cx="17" cy="7" r="1.5" fill="#00F0FF" />
+              <circle cx="7" cy="17" r="1.5" fill="#00F0FF" />
+              <circle cx="17" cy="17" r="1.5" fill="#00F0FF" />
+              <rect x="8" y="8" width="8" height="8" rx="1" fill="#00F0FF" fillOpacity="0.2" stroke="#00F0FF" strokeWidth="1.5" />
+            </svg>
+          ),
+        },
+        {
+          name: "Microcontrollers",
+          color: "#00E5FF",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <rect x="4" y="4" width="16" height="16" rx="3" stroke="#00E5FF" strokeWidth="1.5" />
+              <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" stroke="#00E5FF" strokeWidth="1.5" strokeLinecap="round" />
+              <circle cx="12" cy="12" r="3" stroke="#00E5FF" strokeWidth="1.5" />
+            </svg>
+          ),
+        },
+        {
+          name: "Servo Actuation",
+          color: "#38BDF8",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="12" cy="12" r="8" stroke="#38BDF8" strokeWidth="1.5" />
+              <path d="M12 6v6l4 2" stroke="#38BDF8" strokeWidth="1.5" strokeLinecap="round" />
+              <circle cx="12" cy="12" r="2" fill="#38BDF8" />
+            </svg>
+          ),
+        },
+        {
+          name: "Voice Recognition",
+          color: "#00F0FF",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <rect x="9" y="3" width="6" height="11" rx="3" stroke="#00F0FF" strokeWidth="1.5" />
+              <path d="M5 10v1a7 7 0 0014 0v-1M12 18v4M8 22h8" stroke="#00F0FF" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Sensors & Actuators",
+          color: "#34D399",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M12 3a9 9 0 00-9 9c0 3.5 2 6.5 5 8v1h8v-1c3-1.5 5-4.5 5-8a9 9 0 00-9-9z" stroke="#34D399" strokeWidth="1.5" />
+              <path d="M9 12h6M12 9v6" stroke="#34D399" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Robotics Kinematics",
+          color: "#F59E0B",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="5" cy="19" r="3" stroke="#F59E0B" strokeWidth="1.5" />
+              <circle cx="12" cy="10" r="3" stroke="#F59E0B" strokeWidth="1.5" />
+              <circle cx="19" cy="5" r="3" stroke="#F59E0B" strokeWidth="1.5" />
+              <path d="M7.5 17l2.5-4.5M14.5 8l2.5-1.5" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Motor Controllers",
+          color: "#F87171",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="#F87171" strokeWidth="1.5" />
+              <path d="M12 8v8M8 12h8" stroke="#F87171" strokeWidth="1.5" strokeLinecap="round" />
+              <circle cx="12" cy="12" r="4" fill="#F87171" fillOpacity="0.2" />
+            </svg>
+          ),
+        },
+        {
+          name: "Circuit Design",
+          color: "#A78BFA",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M3 12h3l3-7 4 14 3-7h5" stroke="#A78BFA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Real-Time Systems",
+          color: "#60A5FA",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="#60A5FA" strokeWidth="1.5" />
+              <path d="M12 7v5l3 3" stroke="#60A5FA" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Embedded C/C++",
+          color: "#00F0FF",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 4l-4 16" stroke="#00F0FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          ),
+        },
+      ],
+    },
+    {
+      id: "testing",
+      number: "08",
+      title: "Testing & Automation",
+      color: "#EC4899",
+      tools: [
+        {
+          name: "Vitest",
+          color: "#FCC72B",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#FCC72B">
+              <path d="M12 2L2 19.5h20L12 2zm0 4.5l6.5 11.5h-13L12 6.5z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Jest",
+          color: "#C21325",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#C21325">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
+            </svg>
+          ),
+        },
+        {
+          name: "Playwright",
+          color: "#2EAD33",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="9" cy="12" r="5" stroke="#2EAD33" strokeWidth="1.5" />
+              <circle cx="15" cy="12" r="5" stroke="#45BA4B" strokeWidth="1.5" />
+            </svg>
+          ),
+        },
+        {
+          name: "Cypress",
+          color: "#17202C",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="#69D3A7" strokeWidth="1.5" />
+              <path d="M8 12a4 4 0 108 0" stroke="#69D3A7" strokeWidth="1.5" />
+            </svg>
+          ),
+        },
+        {
+          name: "Postman",
+          color: "#FF6C37",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#FF6C37">
+              <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm3.5 13.5L12 13.2l-3.5 2.3 1-4-3-2.6 4-.3L12 5l1.5 3.6 4 .3-3 2.6 1 4z" />
+            </svg>
+          ),
+        },
+        {
+          name: "WebSockets",
+          color: "#38BDF8",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M4 12h16M14 6l6 6-6 6M10 18l-6-6 6-6" stroke="#38BDF8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "WebRTC",
+          color: "#F59E0B",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="#F59E0B" strokeWidth="1.5" />
+              <path d="M12 3v18M3 12h18" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "GitHub Actions",
+          color: "#2088FF",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="#2088FF" strokeWidth="1.5" strokeDasharray="3 3" />
+              <path d="M8 12l3 3 5-6" stroke="#2088FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          ),
+        },
+      ],
+    },
+    {
+      id: "design",
+      number: "09",
+      title: "Design Systems & UI/UX",
+      color: "#A855F7",
+      tools: [
+        {
+          name: "Figma",
+          color: "#F24E1E",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M8 2h4v4H8V2zM12 2h4a4 4 0 010 8h-4V2zM8 6h4v4H8V6zM8 10h4v4H8v-4zM8 14h4a4 4 0 01-4 4v-4z" fill="#F24E1E" />
+            </svg>
+          ),
+        },
+        {
+          name: "Blender",
+          color: "#EA7600",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#EA7600">
+              <circle cx="12" cy="12" r="4" fill="#EA7600" />
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+            </svg>
+          ),
+        },
+        {
+          name: "WebGL",
+          color: "#990000",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <polygon points="12,2 22,18 2,18" stroke="#990000" strokeWidth="1.5" />
+              <circle cx="12" cy="12" r="3" fill="#990000" />
+            </svg>
+          ),
+        },
+        {
+          name: "Canvas 2D",
+          color: "#00F0FF",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="2" stroke="#00F0FF" strokeWidth="1.5" />
+              <path d="M3 15l6-6 4 4 8-8" stroke="#00F0FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Micro-Interactions",
+          color: "#F43F5E",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="12" cy="12" r="8" stroke="#F43F5E" strokeWidth="1.5" />
+              <path d="M12 8v8M8 12h8" stroke="#F43F5E" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Responsive Design",
+          color: "#38BDF8",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <rect x="2" y="4" width="20" height="13" rx="2" stroke="#38BDF8" strokeWidth="1.5" />
+              <path d="M8 20h8M12 17v3" stroke="#38BDF8" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          ),
+        },
+        {
+          name: "Design Tokens",
+          color: "#A855F7",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <circle cx="7" cy="7" r="3" fill="#A855F7" />
+              <circle cx="17" cy="7" r="3" fill="#A855F7" />
+              <circle cx="7" cy="17" r="3" fill="#A855F7" />
+              <circle cx="17" cy="17" r="3" fill="#A855F7" />
+            </svg>
+          ),
+        },
+        {
+          name: "Rapid Prototyping",
+          color: "#10B981",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9" stroke="#10B981" strokeWidth="1.5" fill="#10B981" fillOpacity="0.2" />
+            </svg>
+          ),
+        },
+      ],
+    },
+  ];
+
+  return (
+    <section id="arsenal" className="relative w-full bg-[#050505] text-white border-t border-white/[0.05] overflow-hidden">
+      {/* Category Navigation Pills (Quick Scroll & Selection) */}
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 pt-24 pb-12 flex flex-col items-center">
+        <p className="font-mono text-xs tracking-[0.4em] uppercase mb-4 text-cyan-400">
+          TECHNICAL STACK &amp; ARSENAL
+        </p>
+        <h2 className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-white text-center mb-10">
+          COMPLETE ARSENAL
+        </h2>
+
+        <div className="flex flex-wrap justify-center gap-2 max-w-4xl">
+          {categories.map((cat, idx) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(idx)}
+              className={`px-4 py-2 rounded-full font-mono text-[11px] font-bold tracking-widest uppercase transition-all duration-300 border cursor-pointer ${
+                activeCategory === idx
+                  ? "bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.4)]"
+                  : "bg-white/[0.02] text-white/50 border-white/[0.08] hover:text-white hover:bg-white/[0.06]"
+              }`}
+            >
+              <span className="opacity-50 mr-1.5">{cat.number}</span>
+              {cat.title}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* PASS 1: The Reference Website's Full-Screen Showcase Presentation */}
+      <div className="relative overflow-hidden w-full">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={categories[activeCategory].id}
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.4 }}
+            className="relative flex items-center justify-center shrink-0 w-full min-h-[70vh] py-20 overflow-hidden"
+          >
+            {/* Giant Background Radial Glow in Category Color */}
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none transition-all duration-700"
+              style={{
+                width: "120vw",
+                height: "120vw",
+                background: `radial-gradient(circle, ${categories[activeCategory].color}18 0%, transparent 60%)`,
+              }}
+            />
+
+            {/* Giant Watermark Ghost Outline Text (identical to yashships.live) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none select-none">
+              <h2
+                className="text-[18vw] font-black uppercase leading-none opacity-[0.03] whitespace-nowrap"
+                style={{ WebkitTextStroke: `2px ${categories[activeCategory].color}` }}
+              >
+                {categories[activeCategory].title}
+              </h2>
+            </div>
+
+            {/* Foreground Content Container */}
+            <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 flex flex-col items-center gap-12">
+              <div className="text-center">
+                <p
+                  className="font-mono text-xs tracking-[0.4em] uppercase mb-4"
+                  style={{ color: categories[activeCategory].color }}
+                >
+                  {categories[activeCategory].number} — Category
+                </p>
+                <h3 className="text-4xl sm:text-6xl md:text-7xl font-black uppercase leading-[0.9] tracking-tighter text-white drop-shadow-2xl">
+                  {categories[activeCategory].title}
+                </h3>
+              </div>
+
+              {/* Square Brand Cards (identical to reference's w-24 h-24 icon tiles) */}
+              <div className="flex flex-wrap justify-center gap-3.5 max-w-5xl">
+                {categories[activeCategory].tools.map((tool, idx) => (
+                  <div
+                    key={idx}
+                    className="group relative flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 rounded-2xl border border-white/10 bg-[#111111]/80 backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:scale-110 hover:z-20 cursor-default shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] hover:border-white/30"
+                  >
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 mb-2 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110 drop-shadow-xl flex items-center justify-center">
+                      {tool.icon}
+                    </div>
+                    <span className="text-[10px] sm:text-[11px] font-semibold tracking-wide text-white/70 group-hover:text-white transition-colors text-center px-1.5 leading-tight">
+                      {tool.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* PASS 2: Categorized Bento Cards Grid (identical to reference's rounded-[2rem] cards) */}
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 border-t border-white/[0.06]">
+        <div className="text-left mb-12">
+          <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-cyan-400 mb-2">
+            ALL CATEGORIES OVERVIEW
+          </p>
+          <h3 className="text-3xl font-black uppercase tracking-tight text-white">
+            EXPLORE THE FULL MATRIX
+          </h3>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {categories.map((category) => (
+            <div
+              key={category.id}
+              className="rounded-[2rem] bg-[#0a0a0a] border border-white/[0.08] p-6 sm:p-8 flex flex-col relative overflow-hidden shadow-2xl hover:border-white/20 transition-all duration-300"
+            >
+              {/* Radial Blur Glow in Corner */}
+              <div
+                className="absolute -top-10 -right-10 w-40 h-40 rounded-full blur-[50px] opacity-20 pointer-events-none"
+                style={{ background: category.color }}
+              />
+
+              {/* Card Header with Pulsing Dot */}
+              <div className="flex items-center justify-between mb-8 relative z-10">
+                <div className="flex items-center gap-3">
+                  <span
+                    className="w-2 h-2 rounded-full"
+                    style={{ background: category.color, boxShadow: `0 0 10px ${category.color}` }}
+                  />
+                  <h4 className="text-lg sm:text-xl font-bold uppercase tracking-widest text-white/90">
+                    {category.title}
+                  </h4>
+                </div>
+                <span className="font-mono text-xs text-white/30">{category.number}</span>
+              </div>
+
+              {/* Grid of Pill Badges (matching yashships.live) */}
+              <div className="flex flex-wrap gap-2.5 sm:gap-3 relative z-10">
+                {category.tools.map((tool, tIdx) => (
+                  <div
+                    key={tIdx}
+                    className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.05] shadow-sm hover:border-white/20 transition-all hover:bg-white/[0.06]"
+                  >
+                    <div className="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-md flex items-center justify-center">
+                      {tool.icon}
+                    </div>
+                    <span className="text-[11px] sm:text-[13px] font-semibold tracking-wide text-white/80">
+                      {tool.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
