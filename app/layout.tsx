@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import localFont from "next/font/local";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -37,6 +38,11 @@ export const metadata: Metadata = {
     "Robotics",
     "Microcontrollers",
     "Facial Recognition",
+    "Autonomous Rescue Drone",
+    "Drone Simulator",
+    "ROS 2",
+    "SLAM Mapping",
+    "AirMouse",
     "PresentX",
     "ResqLink",
     "Gestyxra",
@@ -77,6 +83,14 @@ export default function RootLayout({
           <CustomCursor />
           {children}
         </SmoothScroll>
+
+        {/* AI Agent Floating Widget */}
+        <Script
+          src="https://jswidget.sketricgen.ai/widget-embed.js"
+          data-agent-id="skbrand_0a8c9bf5-72d5-49c8-ba20-a1044a9e8c5c"
+          data-layout="floating"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

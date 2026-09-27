@@ -40,7 +40,7 @@ export default function Home() {
       {/* 02 — Technical Stack Arsenal (Two-Pass Showcase & Matrix) */}
       <TechArsenal />
 
-      {/* 03 — Selected Work Project Grid (ResqLink, PresentX, Gestyxra, Mark 50) */}
+      {/* 03 — Selected Work Project Showcase & Grid (AirMouse Drone Simulator, ResqLink, PresentX, Gestyxra, Robotic Helmet) */}
       <ProjectsGrid />
 
       {/* Cheeky Mid-Page "Still Scrolling?" Callout */}

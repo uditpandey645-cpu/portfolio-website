@@ -135,6 +135,34 @@ export default function JourneyTimeline() {
       ],
       image: "/projects/resqlink.jpg",
     },
+    {
+      id: "05",
+      number: "05",
+      category: "Autonomous Robotics & SLAM",
+      period: "Simulation & Robotics Workstation",
+      title: "AirMouse Autonomous Rescue Drone",
+      role: "Robotics & Perception Engineer",
+      status: "LIVE SIMULATION",
+      statusColor: "text-cyan-400 bg-cyan-400",
+      missionCode: "SLAM.SYS // AIRMOUSE.SIM",
+      location: "ROS 2 Humble / Gazebo",
+      clearance: "AUTONOMOUS SEARCH & RESCUE",
+      objective:
+        "An autonomous rescue drone project focused on SLAM-based mapping and intelligent disaster-environment perception across simulated post-disaster zones.",
+      metrics: [
+        { label: "SLAM Point Cloud Resolution", value: "3D Cartographer", progress: 96 },
+        { label: "AI Survivor Detection", value: "Real-Time PyTorch", progress: 94 },
+        { label: "Simulation Workstation", value: "Gazebo 11 + RViz2", progress: 98 },
+      ],
+      techStack: ["ROS 2 Humble", "Gazebo 11", "RViz2", "LiDAR SLAM", "Raspberry Pi", "Pixhawk", "PyTorch", "TensorFlow"],
+      executionLogs: [
+        "Configured ROS 2 as the core robotics middleware for node communication, control, and autonomous system integration.",
+        "Built Gazebo simulation environment and RViz2 real-time visualization for point-cloud maps, sensors, and robot state.",
+        "Integrated LiDAR for SLAM-based environment mapping, with Raspberry Pi and Pixhawk supporting onboard computation and flight control.",
+        "Deployed PyTorch and TensorFlow for AI-based perception, survivor detection, and intelligent environmental analysis.",
+      ],
+      image: "/projects/drone-simulator.png",
+    },
   ];
 
   return (

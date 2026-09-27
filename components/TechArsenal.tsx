@@ -350,6 +350,49 @@ export default function TechArsenal() {
       color: "#f87171",
       tools: [
         {
+          name: "PyTorch",
+          color: "#EE4C2C",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#EE4C2C">
+              <path d="M13.627 0l-1.01 1.01a8.455 8.455 0 013.992 7.158 8.484 8.484 0 01-2.486 6.002l1.696 1.696a10.878 10.878 0 003.19-7.698A10.843 10.843 0 0013.627 0zm-3.254 2.373a1.44 1.44 0 00-1.44 1.44c0 .795.645 1.44 1.44 1.44.795 0 1.44-.645 1.44-1.44a1.44 1.44 0 00-1.44-1.44zm-3.085 4.882l-1.696-1.696A10.843 10.843 0 002.402 13.256c0 2.996 1.215 5.71 3.19 7.698l1.696-1.696a8.484 8.484 0 01-2.486-6.002c0-2.348.95-4.472 2.486-6.002z" />
+            </svg>
+          ),
+        },
+        {
+          name: "TensorFlow",
+          color: "#FF6F00",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="#FF6F00">
+              <path d="M1.292 5.856L11.54 0v24l-4.095-2.378V7.935l-6.153 3.567V5.856zm21.416 0v3.646l-6.153-3.567v13.687L12.46 24V0l10.248 5.856z" />
+            </svg>
+          ),
+        },
+        {
+          name: "ROS 2 Humble",
+          color: "#22314E",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <rect x="2" y="2" width="20" height="20" rx="4" stroke="#00f0ff" strokeWidth="1.5" />
+              <circle cx="7" cy="7" r="2" fill="#00f0ff" />
+              <circle cx="17" cy="7" r="2" fill="#00f0ff" />
+              <circle cx="12" cy="12" r="2.5" fill="#00f0ff" />
+              <circle cx="7" cy="17" r="2" fill="#00f0ff" />
+              <circle cx="17" cy="17" r="2" fill="#00f0ff" />
+              <path d="M7 7l5 5m0 0l5-5m-5 5l-5 5m5-5l5 5" stroke="#00f0ff" strokeWidth="1.2" />
+            </svg>
+          ),
+        },
+        {
+          name: "Gazebo & RViz",
+          color: "#F37021",
+          icon: (
+            <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#F37021" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <circle cx="12" cy="12" r="2" fill="#00f0ff" />
+            </svg>
+          ),
+        },
+        {
           name: "LangChain",
           color: "#1C8C5E",
           icon: (

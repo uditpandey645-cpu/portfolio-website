@@ -15,8 +15,8 @@ export default function StatsCounter() {
       subtext: "Languages & Frameworks",
     },
     {
-      value: "4+",
-      label: "Production SaaS",
+      value: "5+",
+      label: "Production Builds",
       subtext: "Deployed & Running",
     },
     {
